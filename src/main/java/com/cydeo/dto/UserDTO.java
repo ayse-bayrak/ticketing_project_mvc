@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
     private String firstName;
     private String lastName;
-    private String userName;
+    private String userName;//unique, in here we use email address for username
     private String password;
     private boolean enabled;
     private String phone;
