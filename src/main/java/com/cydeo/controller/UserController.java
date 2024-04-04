@@ -18,7 +18,7 @@ public class UserController {
     public String createUser(Model model){
 
         model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles", );
+        model.addAttribute("roles", find all role );
         //basically all the roles, all the users, all the projects, all the managers everything is located in the DB
         //so i need a mechanism to bring all those data from database
         //find all roles from DB, this is business logic

@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AbstractMapService <T, ID> {
+public abstract class AbstractMapService <T, ID> {
 
-    /** I just need to some custom database, this is smy fake database where i will save
+    /** I just need to some custom database, this is my fake database where i will save
      * whenever i create user whenever I say save, I will describe the same method
      * but where it's gonna save tha data. This is my database
      * why we are using Map, I have something called findById, bring me based on the ID certain user
