@@ -18,15 +18,13 @@ public class UserController {
     public String createUser(Model model){
 
         model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles", find all role );
+        model.addAttribute("roles", find all roles from DB );
         //basically all the roles, all the users, all the projects, all the managers everything is located in the DB
         //so i need a mechanism to bring all those data from database
         //find all roles from DB, this is business logic
         //how I'm gonna bring something to controller from the database
         //from the Service layer
-
         //service layer
-
         //why UserDTO, let's look at the picture, which object is going to view
         //DTO is going to controller and then this DTO is going to pass from Controller
         return "user/create";

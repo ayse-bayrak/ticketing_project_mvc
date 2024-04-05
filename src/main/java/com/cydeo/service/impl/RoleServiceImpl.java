@@ -11,7 +11,7 @@ import java.util.List;
 public class RoleServiceImpl extends AbstractMapService<RoleDTO, Long> implements RoleService {
     @Override
     public RoleDTO save(RoleDTO role) {
-        return super.save(role.getId(), role );
+        return super.save(role.getId(), role ); // when i need to implement something, it is common, and so we wrote AbstractMapService and we inherited from there
     }
 
     @Override

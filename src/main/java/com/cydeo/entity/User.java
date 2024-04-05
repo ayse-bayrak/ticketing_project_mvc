@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 //@AllArgsConstructor
-//Lombok doesn't create this Constructor initialization for the parent Fields
-//That's why we need to create constructor a manually
+//Lombok doesn't create Constructor initialization for the parent Fields
+//That's why we need to create constructor manual if class is extends something(class or interface)
 @Data
 @NoArgsConstructor
 public class User extends BaseEntity{

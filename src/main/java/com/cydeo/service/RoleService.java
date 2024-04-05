@@ -16,15 +16,15 @@ public interface RoleService extends CrudService<RoleDTO, Long> {
 //   void deleteById(Long id);
 
     // this business, it's totally depends on your application needs
-    // this part is in the User Interface and we should create Generic interface
+    // this part is in the UserService Interface also , and we should create Generic interface
     // it means the same thing is repeating with the different return type of different parameter
     // we can make this into interface generic
     //then what it means this same method I can write it one time and then based on the parameter it is accepting, it can execute
 
+    //part in the UserService Interface
 //    UserDTO save(UserDTO user);
 //    UserDTO findById(String username);
-//    // if i want to choose certain user, I'm gonna to choose based on the username
-//    List<UserDTO> findAll(); // we need to it in the UserList
+//    List<UserDTO> findAll();
 //    void deleteById(String username);
 
 }

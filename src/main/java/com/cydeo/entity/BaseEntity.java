@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 //I don't see this information in UI
 //right now 'who created this object' is entity fields. then is different object.
 //That's why we separate this object
+// and we create Base entity for the not existing UI part(User)
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
