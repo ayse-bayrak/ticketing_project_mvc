@@ -86,10 +86,11 @@
                                                 <div class="form-group">
                                                     <label>Gender</label><br>
                                                     <label class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="radio-inline" th:value= "Male" th:field="*{gender}" class="custom-control-input"><span class="custom-control-label">Male</span>
+                                                        <input type="radio" name="radio-inline" th:value= "MALE" th:field="*{gender}" class="custom-control-input"><span class="custom-control-label">Male</span>
+                                                        <!--in UI select Gender Female is meaning th:value, when it's tried to paste it to user, it is looking for this Enum constant, should match with Enum Gender constant. That's why we need to put over there Capital letter-->
                                                     </label>
                                                     <label class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="radio-inline" th:value= "Female" th:field="*{gender}" class="custom-control-input"><span class="custom-control-label">Female</span>
+                                                        <input type="radio" name="radio-inline" th:value= "FEMALE" th:field="*{gender}" class="custom-control-input"><span class="custom-control-label">Female</span>
                                                     </label>
 
                                                 </div>
@@ -100,7 +101,7 @@
                                                     <label>Choose a Role</label>
                                                     <select th:field="*{role}" name="role" class="custom-select">
                                                         <option th:value="''" th:text="Select"></option>
-                                                        <option th:each="role: ${roles}" th:value="${role}" th:text="${role.description}"></option>
+                                                        <option th:each="role: ${roles}" th:value="${role.id}" th:text="${role.description}"></option>
                                                     <!--whenever we select something it is gonna save in the database portion through th:value-->
 <!--                                                    and we should print it to se in the UI-->
                                                     </select>
@@ -158,7 +159,7 @@
 
                                             <tr th:each="user: ${users}" th:value="${user}">
                                                 <!--tr meaning is each row each object-->
-                                                <td th:text="${user.firstName + '' +user.lastName}"></td>
+                                                <td th:text="${user.firstName + ' ' +user.lastName}"></td>
                                             <!--td meaning is each data-->
                                                 <td th:text="${user.userName}"></td>
                                                 <td th:text="${user.gender.value}"></td>
