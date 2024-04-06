@@ -1,24 +1,30 @@
 package com.cydeo.controller;
 
-import com.cydeo.dto.RoleDTO;
 import com.cydeo.dto.UserDTO;
-import com.cydeo.entity.User;
-import com.cydeo.enums.Gender;
+import com.cydeo.service.impl.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    private RoleService roleService;
+
+    public UserController(RoleService roleService) {
+        this.roleService = roleService;
+    }
+
+
     @GetMapping("/create") //localhost:8080/user/create
     public String createUser(Model model){
 
+
+
         model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles", find all roles from DB );
+
+        model.addAttribute("roles", roleService.findAll());
         //basically all the roles, all the users, all the projects, all the managers everything is located in the DB
         //so i need a mechanism to bring all those data from database
         //find all roles from DB, this is business logic

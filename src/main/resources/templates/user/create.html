@@ -100,7 +100,9 @@
                                                     <label>Choose a Role</label>
                                                     <select th:field="*{role}" name="role" class="custom-select">
                                                         <option th:value="''" th:text="Select"></option>
-                                                        <option th:each="theRole: ${roles}" th:text="${theRole}"></option>
+                                                        <option th:each="role: ${roles}" th:value="${role}" th:text="${role.description}"></option>
+                                                    <!--whenever we select something it is gonna save in the database portion through th:value-->
+<!--                                                    and we should print it to se in the UI-->
                                                     </select>
                                                 </div>
                                             </div>

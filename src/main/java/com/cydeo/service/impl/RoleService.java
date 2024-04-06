@@ -1,14 +1,11 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.RoleDTO;
-import com.cydeo.dto.UserDTO;
-import com.cydeo.entity.Role;
-import com.cydeo.service.RoleService;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-
-public class RoleServiceImpl extends AbstractMapService<RoleDTO, Long> implements RoleService {
+@Service // like @Component - create Bean
+public class RoleService extends AbstractMapService<RoleDTO, Long> implements com.cydeo.service.RoleService {
     @Override
     public RoleDTO save(RoleDTO role) {
         return super.save(role.getId(), role ); // when i need to implement something, it is common, and so we wrote AbstractMapService and we inherited from there
