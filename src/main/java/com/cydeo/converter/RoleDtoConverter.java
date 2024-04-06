@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationPropertiesBinding
+// if you try to bring another object inside usually drop down you need converter.
+//For example in here Choose a Role dropdown and Role is object and we need Converter
 public class RoleDtoConverter implements Converter<String, RoleDTO>{
     private final RoleService roleService;
 

@@ -49,17 +49,28 @@ public class UserController {
 //        //if i have different method which is returning same view, whatever we needs(objects, list of something)- you need provide it
 //        return "user/create";
 //    }
-@PostMapping("/create")
-public String insertUser(@ModelAttribute("user") UserDTO user, Model model){
-// whatever view that method is returning you need to go to that view (create html)
-        // you need to provides from this method whatever needs all attributes (user objects, roles, users)
-    model.addAttribute("user", new UserDTO());
-    model.addAttribute("roles", roleService.findAll());
-    userService.save(user);
-    model.addAttribute("users", userService.findAll());
 
-    return "user/create";
+@PostMapping("/create")
+public String insertUser(@ModelAttribute("user") UserDTO user){
+//
+    userService.save(user);
+    //I use redirect and i don't need to again portion
+
+    return "redirect:user/create";
 }
+
+//    @PostMapping("/create")
+//    public String insertUser(@ModelAttribute("user") UserDTO user, Model model){
+//// whatever view that method is returning you need to go to that view (create html)
+//        // you need to provides from this method whatever needs all attributes (user objects, roles, users)
+//        model.addAttribute("user", new UserDTO());
+//        model.addAttribute("roles", roleService.findAll());
+//        userService.save(user);
+//        model.addAttribute("users", userService.findAll());
+//        //but I use redirect and i don't need to again portion
+//
+//        return "user/create";
+//    }
 
 
 }
