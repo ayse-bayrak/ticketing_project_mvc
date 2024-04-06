@@ -156,10 +156,12 @@
 
                                             <tbody>
 
-                                            <tr th:each="user: ${userList}" th:value="${user}">
-                                                <td th:text="${user.firstName}"></td>
+                                            <tr th:each="user: ${users}" th:value="${user}">
+                                                <!--tr meaning is each row each object-->
+                                                <td th:text="${user.firstName + '' +user.lastName}"></td>
+                                            <!--td meaning is each data-->
                                                 <td th:text="${user.userName}"></td>
-                                                <td th:text="${user.gender}"></td>
+                                                <td th:text="${user.gender.value}"></td>
                                                 <td th:text="${user.phone}"></td>
                                                 <td th:text="${user.role.description}"></td>
 
