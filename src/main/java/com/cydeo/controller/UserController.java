@@ -1,16 +1,14 @@
 package com.cydeo.controller;
 
 import com.cydeo.dto.UserDTO;
+import com.cydeo.entity.User;
 import com.cydeo.service.UserService;
 import com.cydeo.service.impl.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -56,13 +54,13 @@ public String insertUser(@ModelAttribute("user") UserDTO user){
     userService.save(user);
     //I use redirect and i don't need to again portion
 
-    return "redirect:user/create";
+    return "redirect:/user/create";
 }
 
 //    @PostMapping("/create")
 //    public String insertUser(@ModelAttribute("user") UserDTO user, Model model){
-//// whatever view that method is returning you need to go to that view (create html)
-//        // you need to provides from this method whatever needs all attributes (user objects, roles, users)
+// whatever view that method is returning you need to go to that view (create html)
+//        // you need to provide from this method whatever needs all attributes (user objects, roles, users)
 //        model.addAttribute("user", new UserDTO());
 //        model.addAttribute("roles", roleService.findAll());
 //        userService.save(user);
@@ -71,6 +69,18 @@ public String insertUser(@ModelAttribute("user") UserDTO user){
 //
 //        return "user/create";
 //    }
+
+    //Anything related with the user, which is create user update use delet user everything
+    //I will build it inside this controller
+
+    @GetMapping("/update/{username}") //click update button or localhost:8080/update/username
+    public String editUser(Model model, @PathVariable String username) {
+        model.addAttribute("user", userService.findById(username));
+        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("users", userService.findAll());
+
+        return "user/update";
+    }
 
 
 }

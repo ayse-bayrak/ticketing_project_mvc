@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CrudService <T, ID>  {
 
-    //we will make Generic Service, interface because these methods, certain businesses
+    //we will make Generic Service interface because these methods, certain businesses
     //like save user, save project, save manager, save employee, save product
     //these are all same thing, only thing what is changing? whatever you try to save
     //in this case Role user or Employee employee object or user object or task object
