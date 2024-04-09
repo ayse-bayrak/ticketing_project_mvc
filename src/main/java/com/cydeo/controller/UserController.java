@@ -51,9 +51,10 @@ public class UserController {
 @PostMapping("/create")
 public String insertUser(@ModelAttribute("user") UserDTO user){
 //
-    userService.save(user);
-    //I use redirect and i don't need to again portion
+    userService.save(user);// when we work in the database save and update is not gonna be the same
+    //in the business logic in the database we are gonna write one logic for save, we need to write another logic in the database
 
+    //I use redirect and i don't need to again portion
     return "redirect:/user/create";
 }
 
@@ -73,14 +74,37 @@ public String insertUser(@ModelAttribute("user") UserDTO user){
     //Anything related with the user, which is create user update use delet user everything
     //I will build it inside this controller
 
-    @GetMapping("/update/{username}") //click update button or localhost:8080/update/username
+    @GetMapping("/update/{username}")
     public String editUser(Model model, @PathVariable String username) {
         model.addAttribute("user", userService.findById(username));
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("users", userService.findAll());
-
         return "user/update";
     }
+
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute("user") UserDTO user) {
+        // i need to update that user, we need to service, do we have any service
+        // we create business  which is updating
+        userService.update(user);
+        return "redirect:/user/create";
+    }
+
+    @GetMapping("/delete/{username}")
+    public String deleteUser(@PathVariable("username") String username) {
+        userService.deleteById(username);
+        return "redirect:/user/create";
+    }
+
+//    @GetMapping("/delete")
+//    public String deleteUser(@ModelAttribute ("user") UserDTO user) {
+//        userService.deleteById(user.getUserName());
+//        return "redirect:/user/create";
+//    }
+    /**
+    Question And here can I use @ModelAttribute like this instead of @PathVariable ?
+    if the answer is yes, what should I change html file to capture 'user' attribute?
+     */
 
 
 }

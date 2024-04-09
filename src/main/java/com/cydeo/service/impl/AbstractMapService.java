@@ -1,9 +1,6 @@
 package com.cydeo.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractMapService <T, ID> {
 
@@ -58,4 +55,9 @@ public abstract class AbstractMapService <T, ID> {
  *
  * @param id ID id (ID is a generic type)
  */
+
+void update(ID id, T object) {
+    map.put(id, object);
+}
+
 }
