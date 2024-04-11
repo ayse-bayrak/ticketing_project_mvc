@@ -1,6 +1,7 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.ProjectDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Status;
 import com.cydeo.service.CrudService;
 import com.cydeo.service.ProjectService;
@@ -50,5 +51,24 @@ public class ProjectServiceImpl extends AbstractMapService <ProjectDTO, String> 
     public void complete(ProjectDTO project) {
         project.setProjectStatus(Status.COMPLETE);
         }
+
+    @Override
+    public List<ProjectDTO> getCountedListOfProjectDTO(UserDTO manager) {
+        List<ProjectDTO> projectList =
+                findAll()
+                        .stream()
+                        .filter(project->project.getAssignedManager().equals(manager))
+                        .map(project-> {
+                            int completeTaskCount =5;
+                            int unFinishedTaskCount =3;
+                            project.setCompleteTaskCount(completeTaskCount);
+                            project.setUnfinishedTaskCount(unFinishedTaskCount);
+                            return project;
+                        })
+                        .toList();
+
+
+        return projectList;
+    }
 
 }
