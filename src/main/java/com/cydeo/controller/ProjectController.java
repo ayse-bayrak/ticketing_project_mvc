@@ -54,4 +54,20 @@ public class ProjectController {
         projectService.complete(projectService.findById(projectCode));
         return "redirect:/project/create";
     }
+
+    @GetMapping("/update/{projectCode}")
+    public String editProject(Model model, @PathVariable String projectCode) {
+        model.addAttribute("project", projectService.findById(projectCode));// we need to populated that project details in the form
+        model.addAttribute("managers", userService.findManagers() );
+        model.addAttribute("projects", projectService.findAll() );
+        return "project/update";
+    }
+
+    @PostMapping("/update")
+    public String updateProject(@ModelAttribute("project") ProjectDTO project) {
+        // i need to update that project, we need to service, do we have any service
+        // we create business  which is updating
+        projectService.update(project);
+        return "redirect:/project/create";
+    }
 }

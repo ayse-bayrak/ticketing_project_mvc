@@ -15,6 +15,8 @@ public class ProjectServiceImpl extends AbstractMapService <ProjectDTO, String> 
 
         if (project.getProjectStatus()==null)
             project.setProjectStatus(Status.OPEN);
+    //the another small topic, may be you can talk challenges, when we try to new project and there is no status project details, but it is needed in the project list in the view page
+    //so we need to before save i need to setStatus Open and then i can save
 
         return super.save(project.getProjectCode(), project);
     }
@@ -31,6 +33,10 @@ public class ProjectServiceImpl extends AbstractMapService <ProjectDTO, String> 
 
     @Override
     public void update(ProjectDTO object) {
+        if (object.getProjectStatus()==null) {
+        object.setProjectStatus(findById(object.getProjectCode()).getProjectStatus());}
+        //the another small topic, may be you can talk challenges, when we try to update and then we put save button, there is no status project deatils
+        // so we need to before update i need to setStatus grabbing the current status project from the database and then i can update
     super.update(object.getProjectCode(), object);
     }
 
