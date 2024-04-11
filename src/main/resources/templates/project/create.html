@@ -131,7 +131,7 @@
                                             <tr th:each="project: ${projects}">
                                                <td th:text="${project.projectCode}"></td>
                                                <td th:text="${project.projectName}"></td>
-                                               <td th:text="${project.startDate+' ' + project.endDate}"></td>
+                                               <td th:text="${#temporals.format(project.startDate,'MM.dd.yyyy')+ '-' + #temporals.format(project.endDate,'MM.dd.yyyy')}"></td>
                                                <td th:text="${project.assignedManager.firstName+' ' + project.assignedManager.lastName}"></td>
                                                 <td th:text="${project.projectStatus.value}"></td>
                                                 <td>
@@ -139,7 +139,7 @@
                                                     <a th:href="@{/project/delete/{id} (id=${project.projectCode})}" ><button type="button" class="btn btn-danger rounded-0">Delete</button></a>
 <!--                                                    is taken from the view and is passing to the endpoint as a /{something}-->
 <!--                                                    whatever we are trying to pass any information from view to controller we need to this definition-->
-                                                    <a href="#"><button type="button" class="btn btn-info rounded-0">Complete</button></a>
+                                                    <a th:href="@{/project/complete/{id} (id=${project.projectCode})}"><button type="button" class="btn btn-info rounded-0">Complete</button></a>
                                                 </td>
                                             </tr>
                                             </tbody>

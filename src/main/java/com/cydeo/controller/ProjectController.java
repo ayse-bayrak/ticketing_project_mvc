@@ -29,9 +29,7 @@ public class ProjectController {
     @GetMapping("/create")
     public String createProject(Model model){
         model.addAttribute("project", new ProjectDTO());
-        //List<UserDTO> managers = new ArrayList<>();
-        //managers = userService.findAll().stream().filter(p->p.getRole().getDescription().equals("manager")).collect(Collectors.toList());
-        model.addAttribute("managers", userService.findAll() );
+        model.addAttribute("managers", userService.findManagers() );
         model.addAttribute("projects", projectService.findAll() );
         return "/project/create";
     }
@@ -49,6 +47,11 @@ public class ProjectController {
 
         projectService.deleteById(projectCode);
 
+        return "redirect:/project/create";
+    }
+    @GetMapping("/complete/{projectCode}")
+    public String completeProject(@PathVariable("projectCode") String projectCode){
+        projectService.complete(projectService.findById(projectCode));
         return "redirect:/project/create";
     }
 }
