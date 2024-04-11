@@ -105,6 +105,16 @@ public String insertUser(@ModelAttribute("user") UserDTO user){
     Question And here can I use @ModelAttribute like this instead of @PathVariable ?
     if the answer is yes, what should I change html file to capture 'user' attribute?
      */
+/*
+ we use the @ModelAttribute for capturing objects. But we use the @PathVariable for capturing data from the endpoint.
+ For example for update/{username} the username is only a single data and not object, that's why we need to use @PathVariable here.
 
+But when we submit a form, for example for user create page, we are actually creating a user object,
+and in order to capture this user object, we need to use the @ModelAttribute.
+
+But while you delete the user, you are not really submitting a new object, we are only selecting one existing user from the list,
+and we have the details of the user such as their username, that is why we capture it using the endpoint and @PathVariable
+and then delete the user based on it
+ */
 
 }

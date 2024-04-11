@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService extends CrudService<UserDTO,String>{
 
     List<UserDTO> findManagers();
-
+    List<UserDTO> findEmployees();
 
 //    //this part is deleted after extends Generic CrudService
 //    UserDTO save(UserDTO user);

@@ -40,4 +40,10 @@ public class UserServiceImpl extends AbstractMapService<UserDTO,String>implement
         return findAll().stream().filter(p->p.getRole().getId()==2).collect(Collectors.toList());
 
     }
+
+    @Override
+    public List<UserDTO> findEmployees() {
+        //return findAll().stream().filter(p->p.getRole().getDescription().equalsIgnoreCase("employee")).collect(Collectors.toList()); // it can be like this
+        return findAll().stream().filter(p->p.getRole().getId()==3).collect(Collectors.toList());
+    }
 }

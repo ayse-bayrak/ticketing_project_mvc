@@ -32,14 +32,17 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form th:object="${task}">
-
+                                    <form th:action="@{/task/create}" method="post" th:object="${task}">
+                                    <!--whenever i click on save this th:action will executed, i am always giving one empty object-->
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Project</label>
-                                                    <select name="project" class="custom-select">
-                                                        <option></option>
+                                                    <select name="project" th:field="*{project}" class="custom-select">
+                                                        <option th:value="' '" th:text="Select"></option>
+                                                        <option th:each="project:${projects}" th:value="${project.projectCode}"
+                                                                th:text="${project.projectName}"
+                                                        ></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -49,8 +52,10 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Assigned Employee</label>
-                                                    <select name="assignedemployee" class="custom-select">
-                                                        <option></option>
+                                                    <select th:field="*{assignedEmployee}" name="assignedemployee" class="custom-select">
+                                                        <option th:value="''" th:text="Select" ></option>
+                                                        <option th:each="employee:${employees}" th:value="${employee.userName}"
+                                                                th:text="${employee.firstName+' ' +employee.lastName}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -59,8 +64,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="tasksubject" class="col-form-label">Task Subject</label>
-                                                    <input id="tasksubject" type="text" class="form-control"
+                                                    <label for="taskSubject" class="col-form-label">Task Subject</label>
+                                                    <input id="taskSubject" type="text" th:field="*{taskSubject}" class="form-control"
                                                            placeholder="task subject">
                                                 </div>
                                             </div>
@@ -69,8 +74,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="taskdetail">Task Detail</label>
-                                                    <textarea id="taskdetail" class="form-control"
+                                                    <label for="taskDetail">Task Detail</label>
+                                                    <textarea id="taskDetail"  th:field="*{taskDetails}" class="form-control"
                                                               placeholder="task detail"></textarea>
                                                 </div>
                                             </div>
@@ -123,15 +128,16 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                            <tr th:each="task: ${tasks}">
+                                                <td th:text="${task.project.projectName}" ></td>
+                                                <td th:text="${task.taskSubject}"></td>
+                                                <td th:text="${task.assignedEmployee.firstName +' '+task.assignedEmployee.lastName}"></td>
+                                                <td th:text="${task.assignedDate.getYear()}"></td>
+                                                <td th:text="${task.taskStatus}"></td>
                                                 <td></td>
                                                 <td class="actions">
                                                     <a href="#" class="btn btn-warning rounded-0">Update</a>
-                                                    <a href="#" class="btn btn-danger rounded-0">Delete</a>
+                                                    <a th:href="@{/task/delete/{id} (id=${task.getId()})}" class="btn btn-danger rounded-0">Delete</a>
                                                 </td>
                                             </tr>
                                             </tbody>
