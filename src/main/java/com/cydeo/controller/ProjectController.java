@@ -81,7 +81,6 @@ public class ProjectController {
         // when we do security this information, whenever we log in username and password,
         // system is gonna know who log into system, so we are gonna know fine by ID portion
 
-
         return "/manager/project-status";
     }
 

@@ -1,16 +1,24 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.ProjectDTO;
+import com.cydeo.dto.TaskDTO;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Status;
-import com.cydeo.service.CrudService;
 import com.cydeo.service.ProjectService;
+import com.cydeo.service.TaskService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ProjectServiceImpl extends AbstractMapService <ProjectDTO, String> implements ProjectService {
+
+    private final TaskService taskService;
+
+    public ProjectServiceImpl(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
     @Override
     public ProjectDTO save(ProjectDTO project) {
 
@@ -59,8 +67,12 @@ public class ProjectServiceImpl extends AbstractMapService <ProjectDTO, String> 
                         .stream()
                         .filter(project->project.getAssignedManager().equals(manager))
                         .map(project-> {
-                            int completeTaskCount =5;
-                            int unFinishedTaskCount =3;
+                            // all the tasks belongs to this project
+
+                          //  List<TaskDTO> taskList = taskService.findAll().stream().filter(p->p.getProject().equals(project)).toList();
+                            List<TaskDTO> taskList = taskService.findTasksByManager(manager);
+                            int completeTaskCount = (int)taskList.stream().filter(task-> task.getProject().equals(project) && task.getTaskStatus()==Status.COMPLETE).count();
+                            int unFinishedTaskCount = (int) taskList.stream().filter(task-> task.getProject().equals(project) && (task.getTaskStatus()!=Status.COMPLETE)).count();
                             project.setCompleteTaskCount(completeTaskCount);
                             project.setUnfinishedTaskCount(unFinishedTaskCount);
                             return project;
