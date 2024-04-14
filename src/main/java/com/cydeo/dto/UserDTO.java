@@ -2,6 +2,7 @@ package com.cydeo.dto;
 
 import com.cydeo.entity.Role;
 import com.cydeo.enums.Gender;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,12 +16,32 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+
+    @NotBlank// first name can not be blank
+    @Size(max=15, min=2)
     private String firstName;
+
+    @NotBlank
+    @Size(max=15, min=2)
     private String lastName;
+
+    @NotBlank
+    @Email
     private String userName;//unique, in here we use email address for username
+
+    @NotBlank
+    @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}")
     private String password;
-    private boolean enabled;
+
+    private boolean enabled; // i leave it empty because i m not gonna touch anything related with enabled
+    @NotBlank
+    @Pattern(regexp = "^\\d{10}$") // should have 10 characters and it should only numbers
     private String phone;
+
+    //@NotBlank is for String fields but RoleDTO is not a String it is an object, we are using NotNull for object
+    @NotNull
     private RoleDTO role;
+
+    @NotNull
     private Gender gender;
 }
