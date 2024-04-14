@@ -1,12 +1,18 @@
 package com.cydeo.controller;
 
+import com.cydeo.dto.ProjectDTO;
 import com.cydeo.dto.TaskDTO;
+import com.cydeo.dto.UserDTO;
+import com.cydeo.enums.Status;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.TaskService;
 import com.cydeo.service.UserService;
+import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/task")
@@ -70,10 +76,39 @@ public class TaskController {
         return "redirect:/task/create";
     }
 
-    @GetMapping("/pending-tasks")
-    public String getPendingTask(Model model){
+    @GetMapping("/employee/pending-tasks") // /task endpoint is coming from the RequestMapping from the top of class
+    public String employeePendingTask(Model model){
 
-        model.addAttribute("projects", projectService.findAll());
+//        UserDTO employee = userService.findById("elizebeth@cydeo.com");
+//        model.addAttribute("tasks", taskService.findTasksByEmployee(employee));
+        model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
         return "/task/pending-tasks";
     }
+
+    @GetMapping("/employee/edit/{id}")
+    public String EmployeeEditTask(@PathVariable Long id, Model model){
+
+        model.addAttribute("task", taskService.findById(id));
+//        model.addAttribute("projects", projectService.findAll());
+//        model.addAttribute("employees", userService.findEmployees());
+        model.addAttribute("statuses", Status.values());
+        model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE)); // we didn't give Complete it is archive there is no need update
+
+      return "/task/status-update";
+    }
+
+    @PostMapping("/employee/update/{id}")
+    public String EmployeeUpdateTask(TaskDTO task) {
+        taskService.updateStatus(task);
+        return "redirect:/task/employee/pending-tasks";
+    }
+
+    @GetMapping("/employee/archive")
+    public String employeeArchivedTasks(Model model){
+
+        model.addAttribute("tasks", taskService.findAllTasksByStatus(Status.COMPLETE));
+        return "/task/archive";
+    }
+
+
 }

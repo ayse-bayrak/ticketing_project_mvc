@@ -39,7 +39,6 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
     @Override
     public void update(TaskDTO task) {
    // first we need to find the task that we have in the database, right now it is in our map
-
         TaskDTO foundTask = findById(task.getId()); // we need to leave same value for status and assingned value, the other field can change from the user side
         task.setTaskStatus(foundTask.getTaskStatus());
         task.setAssignedDate(foundTask.getAssignedDate());
@@ -58,4 +57,28 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
                 .stream()
                 .filter(task->task.getProject().getAssignedManager().equals(manager)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<TaskDTO> findTasksByEmployee(UserDTO employee) {
+        return null;
+    }
+
+    @Override
+    public List<TaskDTO> findAllTasksByStatusIsNot(Status status) {
+        return findAll().stream().filter(task->!task.getTaskStatus().equals(status)).toList();
+    // we are getting all tasks and we are putting in a stream and we are filtering based on their status,
+    // i want is not condition so we put !
+    }
+
+    @Override
+    public List<TaskDTO> findAllTasksByStatus(Status status) {
+        return findAll().stream().filter((task -> task.getTaskStatus().equals(status))).toList();
+    }
+
+    @Override
+    public void updateStatus(TaskDTO task) {
+     findById(task.getId()).setTaskStatus(task.getTaskStatus());//firs, status is updated
+        update(task); // second, task is updated with the new status information
+    }
+
 }
