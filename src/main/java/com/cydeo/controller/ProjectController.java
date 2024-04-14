@@ -77,7 +77,7 @@ public class ProjectController {
         UserDTO manager = userService.findById("john@cydeo.com");
         List<ProjectDTO> projects = projectService.getCountedListOfProjectDTO(manager);
         model.addAttribute("projects", projects);
-        //now I don't know security portion, id portion so now we put hardcodded
+        //now I don't know security portion, id portion so now we put hard codded ("john@cydeo.com")
         // when we do security this information, whenever we log in username and password,
         // system is gonna know who log into system, so we are gonna know fine by ID portion
 

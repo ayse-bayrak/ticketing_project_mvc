@@ -23,7 +23,6 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
         task.setAssignedDate(LocalDate.now());
         if (task.getId()==null)
         task.setId(UUID.randomUUID().getMostSignificantBits());
-       // task.setId(findAll().getLast().getId()+1);
         return super.save(task.getId(), task);
     }
 
@@ -39,12 +38,14 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
 
     @Override
     public void update(TaskDTO task) {
-        if (task.getTaskStatus()==null)
-            task.setTaskStatus(Status.OPEN);
-        if (task.getAssignedDate()==null)
-            task.setAssignedDate(LocalDate.now());
+   // first we need to find the task that we have in the database, right now it is in our map
+
+        TaskDTO foundTask = findById(task.getId()); // we need to leave same value for status and assingned value, the other field can change from the user side
+        task.setTaskStatus(foundTask.getTaskStatus());
+        task.setAssignedDate(foundTask.getAssignedDate());
+
         super.update(task.getId(), task);
-    }
+    }  // i stay in here, here is gonna fix
 
     @Override
     public void deleteById(Long id) {

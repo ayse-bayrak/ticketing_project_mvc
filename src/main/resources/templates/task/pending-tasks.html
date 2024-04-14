@@ -41,9 +41,9 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
+                                            <tr th:each="project: ${projects}">
+                                                <td th:each="${project.getProjectName()}"></td>
+                                                <td th:each="${project.}"></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>

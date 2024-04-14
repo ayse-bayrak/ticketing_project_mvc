@@ -11,15 +11,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskDTO {
-    private Long id;
-    //in the UI there is not unique thing, in these case I should add unique fields to my object fields
+
+
+    //in the UI there is not unique thing like id, in these case I should add unique fields to my object fields
+    // and in the UI Task List we need to some fields like taskStatus and assignedDate; and I should add these fields also
+
     // what i need to convert? whatever you see here not String, it is not gonna do it basically,
     //and we need to convert two things, now we have UserDTO converter and need to ProjectDTO converter also
+
+    private Long id; // added
+
     private ProjectDTO project;
     private UserDTO assignedEmployee;
     private String taskSubject;
     private String taskDetails;
-    private Status taskStatus;
-    private LocalDate assignedDate;
+
+    private Status taskStatus; // added
+    private LocalDate assignedDate; // added
 
 }

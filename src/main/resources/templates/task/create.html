@@ -33,7 +33,8 @@
 
                                     <!-- ------------------------FORM START----------------------------- -->
                                     <form th:action="@{/task/create}" method="post" th:object="${task}">
-                                    <!--whenever i click on save this th:action will executed, i am always giving one empty object-->
+                                    <!--whenever i click on save this th:action will executed, in the beginning i am always giving one empty object-->
+                                    <!--These project are own to manager, so we need to -->
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -133,7 +134,7 @@
                                                 <td th:text="${task.taskSubject}"></td>
                                                 <td th:text="${task.assignedEmployee.firstName +' '+task.assignedEmployee.lastName}"></td>
                                                 <td th:text="${task.assignedDate.getYear()}"></td>
-                                                <td th:text="${task.taskStatus}"></td>
+                                                <td th:text="${task.taskStatus.value}"></td>
                                                 <td></td>
                                                 <td class="actions">
                                                     <a th:href="@{/task/update/{id} (id=${task.getId()})}"  class="btn btn-warning rounded-0">Update</a>

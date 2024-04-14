@@ -8,8 +8,8 @@ import java.util.List;
 public interface UserService extends CrudService<UserDTO,String>{
 
     List<UserDTO> findManagers();
-    List<UserDTO> findEmployees();
-
+    List<UserDTO> findEmployees(); // First I need to put abstract method which is needed in the service and then i implement implementation class
+                                   // because i need to be familiar with app structure, service interface and override in the implementation class
 //    //this part is deleted after extends Generic CrudService
 //    UserDTO save(UserDTO user);
 //    UserDTO findById(String username);

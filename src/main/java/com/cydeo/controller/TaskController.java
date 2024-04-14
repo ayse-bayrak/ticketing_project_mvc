@@ -41,7 +41,7 @@ public class TaskController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteTask(@PathVariable("id") Long id){
+    public String deleteTask(@PathVariable("id") Long id){ // since i use '/' in the endpoint, i need to pathVariable
         taskService.deleteById(id);
         return "redirect:/task/create";
     }
@@ -68,5 +68,12 @@ public class TaskController {
     public String updateTask(TaskDTO task) {
         taskService.update(task);
         return "redirect:/task/create";
+    }
+
+    @GetMapping("/pending-tasks")
+    public String getPendingTask(Model model){
+
+        model.addAttribute("projects", projectService.findAll());
+        return "/task/pending-tasks";
     }
 }
