@@ -1,6 +1,7 @@
 package com.cydeo.dto;
 
 import com.cydeo.enums.Status;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,16 @@ public class TaskDTO {
 
     private Long id; // added
 
+    @NotNull
     private ProjectDTO project;
+
+    @NotNull
     private UserDTO assignedEmployee;
+
+    @NotNull
     private String taskSubject;
+
+    @NotNull
     private String taskDetails;
 
     private Status taskStatus; // added

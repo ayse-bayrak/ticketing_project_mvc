@@ -49,8 +49,13 @@ public class UserController {
 //    }
 
 @PostMapping("/create")
-public String insertUser(@ModelAttribute("user") UserDTO user){
+public String insertUser(@Valid @ModelAttribute("user") UserDTO user, BindingResult bindingResult, Model model){
 //
+    if(bindingResult.hasErrors()){
+        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("users", userService.findAll());
+        return "user/create";
+    }
     userService.save(user);// when we work in the database save and update is not gonna be the same
     //in the business logic in the database we are gonna write one logic for save, we need to write another logic in the database
 

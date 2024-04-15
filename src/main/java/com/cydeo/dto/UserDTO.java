@@ -33,12 +33,16 @@ public class UserDTO {
     @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}")
     private String password;
 
+    @NotNull
+    private String confirmPassword;
+
     private boolean enabled; // i leave it empty because i m not gonna touch anything related with enabled
     @NotBlank
     @Pattern(regexp = "^\\d{10}$") // should have 10 characters and it should only numbers
     private String phone;
 
-    //@NotBlank is for String fields but RoleDTO is not a String it is an object, we are using NotNull for object
+    //@NotBlank, NotEmpty, these are for only String fields but RoleDTO is not a String it is an object, we are using NotNull for object
+
     @NotNull
     private RoleDTO role;
 

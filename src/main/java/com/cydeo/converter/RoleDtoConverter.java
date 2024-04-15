@@ -20,6 +20,10 @@ public class RoleDtoConverter implements Converter<String, RoleDTO>{
 
     @Override
     public RoleDTO convert(String source) {
+        if(source == null || source.equals("")){ // 'Select' option -> ""
+            return null; // if user leaved it empty sending me empty instead of something selection,
+            //and captured by @NotNull above the RoleDTO
+        }
         return roleService.findById(Long.parseLong(source));
     }
 }

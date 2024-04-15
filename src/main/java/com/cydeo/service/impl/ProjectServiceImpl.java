@@ -72,8 +72,8 @@ public class ProjectServiceImpl extends AbstractMapService <ProjectDTO, String> 
                             List<TaskDTO> taskList = taskService.findTasksByManager(manager);
                             int completeTaskCount = (int)taskList.stream().filter(task-> task.getProject().equals(project) && task.getTaskStatus()==Status.COMPLETE).count();
                             int unFinishedTaskCount = (int) taskList.stream().filter(task-> task.getProject().equals(project) && (task.getTaskStatus()!=Status.COMPLETE)).count();
-                            project.setCompleteTaskCount(completeTaskCount);
-                            project.setUnfinishedTaskCount(unFinishedTaskCount);
+                            project.setCompleteTaskCounts(completeTaskCount);
+                            project.setUnfinishedTaskCounts(unFinishedTaskCount);
                             return project;
                         })
                         .toList();
