@@ -6,6 +6,9 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+//why I define both package DTO and Entity?
+//whatever I am showing on the UI is different object than whatever we are saving in the data base
+//basically my entity save in the database, DTO is going to UI (So in the entity we define BaseEntity)
 //whatever we see in the UI part in the DTO field
 //but whatever you save in the database for example i want to save who create this object,
 //I don't see this information in UI

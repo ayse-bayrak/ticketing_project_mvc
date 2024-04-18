@@ -12,13 +12,16 @@ import java.time.LocalDateTime;
 //That's why we need to create constructor manual if class is extends something(class or interface)
 @Data
 @NoArgsConstructor
+//@AllArgsConstructor we don't put AllArgConstructor, because if i have super class,
+// lombok does not create this contructor initialization for the parent fields
+//that's why we need to create manually constructor
 public class User extends BaseEntity{
 
     private String firstName;
     private String lastName;
     private String userName;
     private String password;
-    private boolean enabled;
+    private boolean enabled; // this structure i will do in the security
     private String phone;
     private Role role;
     private Gender gender;

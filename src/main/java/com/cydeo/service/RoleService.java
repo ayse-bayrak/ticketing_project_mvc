@@ -7,10 +7,12 @@ import java.util.List;
 
 public interface RoleService extends CrudService<RoleDTO, Long> {
 
+    //if class or interface, the same thing is repeating with the different type and different parameter
+    //we can make Generic
 //   as a developer in this stage, this service is dynamic, because that is business logic
 //   whenever you need user stories you're gonna come here and build it.
 //   this part is deleted after extends Generic CrudService
-//   RoleDTO save(RoleDTO user);
+//   RoleDTO save(RoleDTO role);
 //   RoleDTO findById(Long id);
 //   List<RoleDTO> findAll();
 //   void deleteById(Long id);

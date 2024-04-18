@@ -15,9 +15,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+//bootstrap meaning is initial something, initial sit the data, load the data
 @Component
 public class DataGenerator implements CommandLineRunner  {
-    //SpringBoot gives me CommandLineRunner interface
+    //Spring framework gives me CommandLineRunner interface (Functional Interface)
 
     private final RoleService roleService;
     private final UserService userService;
@@ -39,15 +40,17 @@ public class DataGenerator implements CommandLineRunner  {
         // first this method is executing right away before doing anything
         // how we came to this point? I need to some roles in the application,
         //whenever I start the application, some roles need to be loaded
-        //create some roles and put in the DB (map)
         //whatever you need it initially some data in the application
         //we are gonna put it here
+
+
+        //1-one logic==>create some roles and put in the DB (map)
 
         RoleDTO adminRole = new RoleDTO(1L, "Admin");
         RoleDTO managerRole = new RoleDTO(2L, "Manager");
         RoleDTO employeeRole = new RoleDTO(3L, "Employee");
 
-        // adding data base through related object interface (in her roleService)
+        //1-1 adding data base through related object interface (in her roleService)
         roleService.save(adminRole);
         roleService.save(managerRole);
         roleService.save(employeeRole);
@@ -59,6 +62,7 @@ public class DataGenerator implements CommandLineRunner  {
         //if you want to use if one classes and another class relationship has
         // if data generator has a some other class create relationship
 
+        //2-the other one logic==> create users and put in the DB(map)
 
         UserDTO user1 = new UserDTO("John", "Kesy",
                 "john@cydeo.com", "Abc1", "Abc1", true, "7459684532", managerRole, Gender.MALE);
@@ -77,6 +81,7 @@ public class DataGenerator implements CommandLineRunner  {
         UserDTO user8 = new UserDTO("Bill", "Matt",
                 "bill@cydeo.com", "Abc8", "Abc8", true, "8881239846", employeeRole, Gender.MALE);
 
+        //2-1 //2-1 adding data base through related object interface (in her userService)
         userService.save(user1);
         userService.save(user2);
         userService.save(user3);
@@ -86,6 +91,7 @@ public class DataGenerator implements CommandLineRunner  {
         userService.save(user7);
         userService.save(user8);
 
+        // and go on other similar logic for project and task
         ProjectDTO project1 = new ProjectDTO("Spring MVC", "PR001", user1, LocalDate.now(), LocalDate.now().plusDays(25), "Creating Controllers", Status.OPEN);
         ProjectDTO project2 = new ProjectDTO("Spring ORM", "PR002", user2, LocalDate.now(), LocalDate.now().plusDays(10), "Creating Database", Status.IN_PROGRESS);
         ProjectDTO project3 = new ProjectDTO("Spring Container", "PR003", user1, LocalDate.now(), LocalDate.now().plusDays(32), "Creating Container", Status.IN_PROGRESS);

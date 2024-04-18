@@ -5,10 +5,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service // like @Component - create Bean
-public class RoleService extends AbstractMapService<RoleDTO, Long> implements com.cydeo.service.RoleService {
+public class RoleServiceImpl extends AbstractMapService<RoleDTO, Long> implements com.cydeo.service.RoleService {
+   // firstly I apply RoleServiceImpl implement RoleService for override method of abstract method in the service and then I use extends AbstractMapService for inherit implementation
     @Override
     public RoleDTO save(RoleDTO role) {
-        return super.save(role.getId(), role ); // when i need to implement something, it is common, and so we wrote AbstractMapService and we inherited from there
+        return super.save(role.getId(), role ); // when i need to implement something, it is common, and so we wrote AbstractMapService, it has the implementation, call the method here and I inherited from there via super.method
     }
 
     @Override

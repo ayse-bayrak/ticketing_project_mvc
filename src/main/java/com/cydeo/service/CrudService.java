@@ -5,6 +5,7 @@ import com.cydeo.dto.UserDTO;
 import java.util.List;
 
 public interface CrudService <T, ID>  {
+    //we put here whatever common for all services, if something is unique to any service, go that service and write in that service
 
     //we will make Generic Service interface because these methods, certain businesses
     //like save user, save project, save manager, save employee, save product
@@ -13,6 +14,7 @@ public interface CrudService <T, ID>  {
     // only parameters is changing, so i can just generic design
     //I need to convert save method to Generic,
     //UserDTO save(UserDTO user);
+    //it is very nice example about Generic real application
 
     T save(T user);
     T findById(ID username);

@@ -1,17 +1,19 @@
 package com.cydeo.controller;
 
 import com.cydeo.dto.UserDTO;
-import com.cydeo.entity.User;
+import com.cydeo.service.RoleService;
 import com.cydeo.service.UserService;
-import com.cydeo.service.impl.RoleService;
+import com.cydeo.service.impl.RoleServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+// Controller package and class where we are building the endpoints, it is best practice that name always needs to match
+//we are gonna click on create user page, i named UserController
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user") // i want to  define one class level /user
 public class UserController {
     private final RoleService roleService;
     private final UserService userService;
@@ -21,11 +23,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/create") //localhost:8080/user/create
+    @GetMapping("/create") //localhost:8080/user/create // and then we can write my method which is create endpoint
     public String createUser(Model model){
 
         model.addAttribute("user", new UserDTO());
         model.addAttribute("roles", roleService.findAll());
+        //                          find all the roles from the DB ==> business logic
         //basically all the roles, all the users, all the projects, all the managers everything is located in the DB
         //so i need a mechanism to bring all those data from database
         //find all roles from DB, this is business logic

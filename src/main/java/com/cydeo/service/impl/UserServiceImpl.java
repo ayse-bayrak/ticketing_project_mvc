@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service // like @Component - create Bean
 public class UserServiceImpl extends AbstractMapService<UserDTO,String>implements UserService {
     @Override
-    public UserDTO save(UserDTO user) {
+    public UserDTO save(UserDTO user) { // if I am implementing it(UserServiceImpl) interface, meaning i am making contract, i need to give implementation for all the abstract method inside
         return super.save(user.getUserName(), user ); // when i need to implement something, it is common, and so we wrote AbstractMapService and we inherited from there
     }
 

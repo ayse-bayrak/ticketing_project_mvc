@@ -3,6 +3,10 @@ package com.cydeo.service.impl;
 import java.util.*;
 
 public abstract class AbstractMapService <T, ID> {
+    //Why this class created and i am gonna put abstract?
+    //RoleServiceImpl, UserServiceImpl, ProjectServiceImpl... all of them implementation is going to be similar.
+    //we don't need to write it again again
+    //abstract because I'm just gonna use this as Template
 
     /** I just need to some custom database, this is my fake database where i will save
      * whenever i create user whenever I say save, I will describe the same method
@@ -11,12 +15,13 @@ public abstract class AbstractMapService <T, ID> {
      * Certain role.. it is gonna be so much easy to do with Map
      * because Map have a key and value give me the key and then it will give it object */
 
+            //Custom Database
     public Map<ID, T> map = new HashMap<>(); //DB --> custom DB fake DB
 
     T save (ID id, T object){
         map.put(id, object);
         return object; //return map.get(id);
-    }
+    } //this structure can work ant service
     /**
      * This generic method puts an object (T type) with the given id (ID type) into the Map (Custom DB).
      * At the end, it returns the object which it put into Map.
@@ -49,6 +54,7 @@ public abstract class AbstractMapService <T, ID> {
     void deleteById(ID id) {
         map.remove(id);
     }
+
 /**
  * This generic method removes the object which has an id equals the id coming from the method parameter, from the Map created above.
  * This generic method doesn't return anything after it removed the corresponding object in the Map.

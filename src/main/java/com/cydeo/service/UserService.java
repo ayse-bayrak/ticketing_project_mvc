@@ -1,11 +1,13 @@
 package com.cydeo.service;
 
-import com.cydeo.dto.RoleDTO;
 import com.cydeo.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserService extends CrudService<UserDTO,String>{
+
+    //we put here whatever common for all services, if something is unique to user service,
+    // go that service and write in that service
 
     List<UserDTO> findManagers();
     List<UserDTO> findEmployees(); // First I need to put abstract method which is needed in the service and then i implement implementation class
