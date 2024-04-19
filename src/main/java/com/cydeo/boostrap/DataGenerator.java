@@ -10,13 +10,16 @@ import com.cydeo.service.ProjectService;
 import com.cydeo.service.RoleService;
 import com.cydeo.service.TaskService;
 import com.cydeo.service.UserService;
+import com.cydeo.service.impl.RoleServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 //bootstrap meaning is initial something, initial sit the data, load the data
-@Component
+
+@Component// why i need to @Component? what was the rule where we need to use @Component or What kind of classes it needs to be managed by Spring as an object?
+//either use in another class or it is using another class, if one class has a dependency or if this class is going to be used as a dependency some other class we need to use @Component
 public class DataGenerator implements CommandLineRunner  {
     //Spring framework gives me CommandLineRunner interface (Functional Interface)
 
@@ -25,6 +28,8 @@ public class DataGenerator implements CommandLineRunner  {
     private final ProjectService projectService;
     private final TaskService taskService;
 
+    //go to role service for example, give me one Bean belongs to Row service injected
+    //interface we never put @Component, we put in the implementation
     public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService, TaskService taskService) {
         this.roleService = roleService;
         this.userService = userService;
@@ -47,10 +52,23 @@ public class DataGenerator implements CommandLineRunner  {
         //1-one logic==>create some roles and put in the DB (map)
 
         RoleDTO adminRole = new RoleDTO(1L, "Admin");
+        //whenever this application execute,
+        // first is gonna create this object for me
         RoleDTO managerRole = new RoleDTO(2L, "Manager");
         RoleDTO employeeRole = new RoleDTO(3L, "Employee");
 
-        //1-1 adding data base through related object interface (in her roleService)
+        //1-1 adding data base through `related object interface` (in here roleService)
+
+        RoleServiceImpl rs = new RoleServiceImpl();
+        rs.save(adminRole);// did I add adminRole objcet in the map, yes
+        //everything is okey? Coupling when I do this one, I am doing tight coupling,
+        // Spring don't like new keyword because i am creating object by myself, i need to manage this object,
+        // if anything needs to change, i need to change, spring does not like this one, this is tight coupling
+        // how i am gonna do lose coupling?
+        //What kind of Spring Core principle we need to implement here fix this code?
+        //IOC our main principle, we need to it. i don't need to control, i must bring to control IOC
+        //we need to implement here. What kind of things need to implement?
+        //Dependency Injection
         roleService.save(adminRole);
         roleService.save(managerRole);
         roleService.save(employeeRole);
