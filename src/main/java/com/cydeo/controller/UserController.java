@@ -9,39 +9,47 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+//Controller classes ==> to handle user request
 // Controller package and class where we are building the endpoints, it is best practice that name always needs to match
 //we are gonna click on create user page, i named UserController
 
-@Controller
-@RequestMapping("/user") // i want to  define one class level /user
+@Controller //(One of three types of @component)
+@RequestMapping("/user") // i want to  define one class level /user, categorization
 public class UserController {
     private final RoleService roleService;
+    //if you using any method belongs to other class, you need to inject.
     private final UserService userService;
 
     public UserController(RoleService roleService, UserService userService) {
         this.roleService = roleService;
         this.userService = userService;
     }
-
+        //different http request type
     @GetMapping("/create") //localhost:8080/user/create // and then we can write my method which is create endpoint
     public String createUser(Model model){
 
         model.addAttribute("user", new UserDTO());
+        //why UserDTO, let's look at the picture, which object is going to view
+        //DTO is going to controller and then this DTO is going to pass from Controller
+
+
         model.addAttribute("roles", roleService.findAll());
         //                          find all the roles from the DB ==> business logic
+
+        // do i have service? --> findAll
+
         //basically all the roles, all the users, all the projects, all the managers everything is located in the DB
         //so i need a mechanism to bring all those data from database
         //find all roles from DB, this is business logic
         //how I'm gonna bring something to controller from the database
         //from the Service layer
         //service layer
-        //why UserDTO, let's look at the picture, which object is going to view
-        //DTO is going to controller and then this DTO is going to pass from Controller
+        //if you using any method belongs to other class, you need to inject.
 
         model.addAttribute("users", userService.findAll());
 
         return "user/create";
-        //whatever inside that view any object, ant attribute you need to provide it inside this method
+        //whatever inside that view (user/create) any object, any attribute you need to provide it inside this method
         //because this method is returning this view
     }
 
@@ -84,6 +92,13 @@ public String insertUser(@Valid @ModelAttribute("user") UserDTO user, BindingRes
 
     @GetMapping("/update/{username}")
     public String editUser(Model model, @PathVariable String username) {
+        //we need to put inside this method whatever view need
+        // user object ${user} view is looking for this
+        // roles  ${roles} view is looking for this
+        // users  ${users} view is looking for this
+        //I need to create all this attributes
+        // first one for ${user}  ==> whenever i click on update, I need to go to database,
+        // I need to request this object and I need to populate it here
         model.addAttribute("user", userService.findById(username));
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("users", userService.findAll());
@@ -93,7 +108,8 @@ public String insertUser(@Valid @ModelAttribute("user") UserDTO user, BindingRes
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") UserDTO user) {
         // i need to update that user, we need to service, do we have any service
-        // we create business  which is updating
+        // talk to with terminology
+        // we need to create business which is updating
         userService.update(user);
         return "redirect:/user/create";
     }
@@ -104,16 +120,10 @@ public String insertUser(@Valid @ModelAttribute("user") UserDTO user, BindingRes
         return "redirect:/user/create";
     }
 
-//    @GetMapping("/delete")
-//    public String deleteUser(@ModelAttribute ("user") UserDTO user) {
-//        userService.deleteById(user.getUserName());
-//        return "redirect:/user/create";
-//    }
-    /**
-    Question And here can I use @ModelAttribute like this instead of @PathVariable ?
+ /*
+    Question Answer: can I use @ModelAttribute like this instead of @PathVariable ?
     if the answer is yes, what should I change html file to capture 'user' attribute?
-     */
-/*
+
  we use the @ModelAttribute for capturing objects. But we use the @PathVariable for capturing data from the endpoint.
  For example for update/{username} the username is only a single data and not object, that's why we need to use @PathVariable here.
 

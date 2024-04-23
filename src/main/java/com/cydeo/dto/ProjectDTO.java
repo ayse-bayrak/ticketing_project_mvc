@@ -36,10 +36,12 @@ public class ProjectDTO {
 
         private Status projectStatus;
 
-        private int completeTaskCounts;
+        private int completeTaskCounts; // I added these two fields because my project-status htm needs
         private int unfinishedTaskCounts;
 
-        //since data generator complain because of all args constructor we need to another constructor except added fields
+        //since data generator complain because of all args constructor
+        // we need to another constructor except added fields,
+        // I need able to figure out these two fields so we can create one more constructor
         public ProjectDTO(String projectName, String projectCode, UserDTO assignedManager, LocalDate startDate, LocalDate endDate, String projectDetail, Status projectStatus) {
                 this.projectName = projectName;
                 this.projectCode = projectCode;
@@ -48,6 +50,7 @@ public class ProjectDTO {
                 this.endDate = endDate;
                 this.projectDetail = projectDetail;
                 this.projectStatus = projectStatus;
-        }
+        } // this constructor where am I using? Project Create page
+        // allArgConstructor, I am using project-status page to display Project List table
 }
 

@@ -29,6 +29,7 @@ public class ProjectController {
     @GetMapping("/create")
     public String createProject(Model model){
         model.addAttribute("project", new ProjectDTO());
+        // do i have service? --> findAll
         model.addAttribute("managers", userService.findManagers() );
         model.addAttribute("projects", projectService.findAll() );
         return "/project/create";
@@ -36,7 +37,7 @@ public class ProjectController {
 
     @PostMapping("/create")
     public String insertProject(@ModelAttribute("project") ProjectDTO project){
-
+        //i need to ask myself? do i have service? --> SAVE
         projectService.save(project);
 
         return "redirect:/project/create";
@@ -51,6 +52,8 @@ public class ProjectController {
     }
     @GetMapping("/complete/{projectCode}")
     public String completeProject(@PathVariable("projectCode") String projectCode){
+
+        //complete -> status to complete -> do i have service?
         projectService.complete(projectService.findById(projectCode));
         return "redirect:/project/create";
     }
@@ -82,6 +85,12 @@ public class ProjectController {
         // system is gonna know who log into system, so we are gonna know fine by ID portion
 
         return "/manager/project-status";
+    }
+
+    @GetMapping("/manager/complete/{projectCode}")
+    public String managerCompleteProject(@PathVariable("projectCode") String projectCode) {
+        projectService.complete(projectService.findById(projectCode));
+        return "redirect:/project/manager/project-status";
     }
 
 }

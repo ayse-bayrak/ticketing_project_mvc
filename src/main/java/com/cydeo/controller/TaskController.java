@@ -30,8 +30,9 @@ public class TaskController {
     @GetMapping("/create")
     public String createProject(Model model){
         model.addAttribute("task", new TaskDTO());
+        //if I need anything from database portion i need to think service? has any service which is gonna give me all the project ? yes findAll
         model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("employees", userService.findEmployees());
+        model.addAttribute("employees", userService.findEmployees()); // I create method in the service
         model.addAttribute("tasks", taskService.findAll());
 
         return "/task/create";
@@ -52,6 +53,11 @@ public class TaskController {
         return "redirect:/task/create";
     }
 
+    // Update, I am doing two things all the time, GetMapping and PostMapping
+    //First i edit i am populated data with GetMapping, then i change something.. and i am updating with the post mapping
+    // first edit, and I need to update htm
+    //how i am gonna figure out endpint? where am i now? create htm and i need to look at cretae html for end point
+
     @GetMapping("/update/{id}")
     public String editTask(@PathVariable("id") Long id, Model model) {
         model.addAttribute("task", taskService.findById(id));
@@ -62,15 +68,15 @@ public class TaskController {
         return "/task/update";
     }
 
-
-//    @PostMapping("/update/{id}")
-//    public String updateTask(@PathVariable("id") Long id, TaskDTO task) {
-//        task.setId(id);
+//    @PostMapping("/update/{taskId}")
+//    public String updateTask(@PathVariable("taskId") Long taskId, TaskDTO task) {
+//        task.setId(taskId);
 //        taskService.update(task);
 //        return "redirect:/task/create";
-//    }
+//    }  // we can convert to above code
 
     @PostMapping("/update/{id}") // if you are using the same name, it is doing the job automatically for you, you don't need to path variable
+    // why we capture id, because there is not form in the UI, and when i update or delete, I need to capture this unique id
     public String updateTask(TaskDTO task) {
         taskService.update(task);
         return "redirect:/task/create";

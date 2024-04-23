@@ -23,6 +23,11 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
         task.setAssignedDate(LocalDate.now());
         if (task.getId()==null)
         task.setId(UUID.randomUUID().getMostSignificantBits());
+
+        // in here tehere are a lot of business logic, when I save new task, I should set whatever i will need
+        // in here maybe id is a little tricky, because there is not id in the table,
+        // but i need update or delete I need id, so I should add id also when we save new task
+
         return super.save(task.getId(), task);
     }
 

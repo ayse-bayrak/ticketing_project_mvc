@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 //right now 'who created this object' is entity fields. then is different object.
 //That's why we separate this object
 //entity package-dto package
+//validation is bounding of your data
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

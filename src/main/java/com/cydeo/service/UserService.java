@@ -6,12 +6,15 @@ import java.util.List;
 
 public interface UserService extends CrudService<UserDTO,String>{
 
-    //we put here whatever common for all services, if something is unique to user service,
-    // go that service and write in that service
+    //we put CrudService whatever common for all services, but if something is unique to user service,
+    // I should come back here and i should write unique logic which is needed userService
 
     List<UserDTO> findManagers();
     List<UserDTO> findEmployees(); // First I need to put abstract method which is needed in the service and then i implement implementation class
                                    // because i need to be familiar with app structure, service interface and override in the implementation class
+
+
+
 //    //this part is deleted after extends Generic CrudService
 //    UserDTO save(UserDTO user);
 //    UserDTO findById(String username);

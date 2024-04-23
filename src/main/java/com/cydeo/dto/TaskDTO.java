@@ -20,7 +20,7 @@ public class TaskDTO {
     // what i need to convert? whatever you see here not String, it is not gonna do it basically,
     //and we need to convert two things, now we have UserDTO converter and need to ProjectDTO converter also
 
-    private Long id; // added
+    private Long id; // added, I am just adding by my self
 
     @NotNull
     private ProjectDTO project;

@@ -20,10 +20,6 @@ public interface CrudService <T, ID>  {
     T findById(ID username);
     List<T> findAll();/** how is gonna find it, so next stage is : we gonna create those implementation impl*/
     void deleteById(ID username);
-    void update(T object);
-
-    //That method should be required in all of the services..
-
-
+    void update(T object); //That method should be required in all of the services, so I can add inside the CrudService
 
 }

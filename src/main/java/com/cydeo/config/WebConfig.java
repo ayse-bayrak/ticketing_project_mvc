@@ -13,5 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/").setViewName("login");
     }
+//for static page, no data no implementation only page, you can do like this, (endpoint) (viewPage)
+    //simple controller
 
 }
