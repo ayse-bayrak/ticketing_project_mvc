@@ -23,12 +23,12 @@ import java.time.LocalDate;
 public class DataGenerator implements CommandLineRunner  {
     //Spring framework gives me CommandLineRunner interface (Functional Interface)
 
-    private final RoleService roleService;
+    private final RoleService roleService;  //one class has a dependency
     private final UserService userService;
     private final ProjectService projectService;
     private final TaskService taskService;
 
-    //go to role service for example, give me one Bean belongs to Row service injected
+    //go to role service for example, give me one Bean belongs to Role service injected
     //interface we never put @Component, we put in the implementation
     public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService, TaskService taskService) {
         this.roleService = roleService;
