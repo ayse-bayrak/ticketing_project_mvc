@@ -24,8 +24,8 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
         if (task.getId()==null)
         task.setId(UUID.randomUUID().getMostSignificantBits());
 
-        // in here tehere are a lot of business logic, when I save new task, I should set whatever i will need
-        // in here maybe id is a little tricky, because there is not id in the table,
+        // in here there are a lot of business logic, when I save new task, I should set whatever i will need
+        // in here maybe id is a little tricky, because there is no id in the table,
         // but i need update or delete I need id, so I should add id also when we save new task
 
         return super.save(task.getId(), task);
@@ -44,9 +44,9 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
     @Override
     public void update(TaskDTO task) {
    // first we need to find the task that we have in the database, right now it is in our map
-        TaskDTO foundTask = findById(task.getId()); // we need to leave same value for status and assingned value, the other field can change from the user side
-        task.setTaskStatus(foundTask.getTaskStatus());
-        task.setAssignedDate(foundTask.getAssignedDate());
+    TaskDTO foundTask = findById(task.getId()); // we need to leave same value for status and assigned value, the other field can change from the user side
+    task.setTaskStatus(foundTask.getTaskStatus());
+    task.setAssignedDate(foundTask.getAssignedDate());
 
         super.update(task.getId(), task);
     }  // i stay in here, here is gonna fix
@@ -82,7 +82,7 @@ public class TaskServiceImpl extends AbstractMapService<TaskDTO, Long> implement
 
     @Override
     public void updateStatus(TaskDTO task) {
-     findById(task.getId()).setTaskStatus(task.getTaskStatus());//firs, status is updated
+     findById(task.getId()).setTaskStatus(task.getTaskStatus());//first, status is updated
         update(task); // second, task is updated with the new status information
     }
 
