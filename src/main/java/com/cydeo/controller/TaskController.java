@@ -30,9 +30,11 @@ public class TaskController {
     @GetMapping("/create")
     public String createProject(Model model){
         model.addAttribute("task", new TaskDTO());
-        //if I need anything from database portion i need to think service? has any service which is gonna give me all the project ? yes findAll
+        //if I need anything from database portion i need to think service?
+        // has any service which is gonna give me all the project ? yes findAll
         model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("employees", userService.findEmployees()); // I create method in the service
+        model.addAttribute("employees", userService.findEmployees());
+        // I created method in the service layer in userService
         model.addAttribute("tasks", taskService.findAll());
 
         return "/task/create";
@@ -48,15 +50,17 @@ public class TaskController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteTask(@PathVariable("id") Long id){ // since i use '/' in the endpoint, i need to pathVariable
+    public String deleteTask(@PathVariable("id") Long id){
+        // since i use '/' in the endpoint, i need to pathVariable
         taskService.deleteById(id);
         return "redirect:/task/create";
     }
 
     // Update, I am doing two things all the time, GetMapping and PostMapping
     //First i edit i am populated data with GetMapping, then i change something.. and i am updating with the post mapping
-    // first edit, and I need to update htm
-    //how i am gonna figure out endpint? where am i now? create htm and i need to look at cretae html for end point
+    // first edit, and I need to update html
+    //how i am gonna figure out endpoint?
+    // where am i now? create html and i need to look at create html for end point
 
     @GetMapping("/update/{id}")
     public String editTask(@PathVariable("id") Long id, Model model) {
