@@ -7,7 +7,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-//@ConfigurationPropertiesBinding we do not need to anymore, Spring recognize it also
+//@ConfigurationPropertiesBinding we do not need to anymore,
+// Spring recognize it also
 public class ProjectDtoConverter implements Converter<String, ProjectDTO> {
     final ProjectService projectService;
 
