@@ -10,14 +10,15 @@ import org.springframework.validation.BindingResult;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 //Controller classes ==> to handle user request
-// Controller package and class where we are building the endpoints, it is best practice that name always needs to match
+// Controller package and class where we are building the endpoints,
+// it is best practice that name always needs to match
 //we are gonna click on create user page, i named UserController
 
-@Controller //(One of three types of @component)
+@Controller //(One of three types of @component)--> @Repository, @Service
 @RequestMapping("/user") // i want to  define one class level /user, categorization
 public class UserController {
     private final RoleService roleService;
-    //if you using any method belongs to other class, you need to inject.
+    //if you are using any method belongs to other class, you need to inject.
     private final UserService userService;
 
     public UserController(RoleService roleService, UserService userService) {
@@ -25,7 +26,7 @@ public class UserController {
         this.userService = userService;
     }
         //different http request type
-    @GetMapping("/create") //localhost:8080/user/create // and then we can write my method which is create endpoint
+    @GetMapping("/create") //localhost:8080/user/create // and then we can write my method which is created endpoint
     public String createUser(Model model){
 
         model.addAttribute("user", new UserDTO());
@@ -44,7 +45,7 @@ public class UserController {
         //how I'm gonna bring something to controller from the database
         //from the Service layer
         //service layer
-        //if you using any method belongs to other class, you need to inject.
+        //if you are using any method belongs to other class, you need to inject.
 
         model.addAttribute("users", userService.findAll());
 
@@ -68,7 +69,8 @@ public String insertUser(@Valid @ModelAttribute("user") UserDTO user, BindingRes
         return "user/create";
     }
     userService.save(user);// when we work in the database save and update is not gonna be the same
-    //in the business logic in the database we are gonna write one logic for save, we need to write another logic in the database
+    //in the business logic in the database we are gonna write one logic for save,
+    // we need to write another logic in the database
 
     //I use redirect and i don't need to again portion
     return "redirect:/user/create";
@@ -87,11 +89,13 @@ public String insertUser(@Valid @ModelAttribute("user") UserDTO user, BindingRes
 //        return "user/create";
 //    }
 
-    //Anything related with the user, which is create user update use delet user everything
+    //Anything related with the user, which is created user update user delete user everything
     //I will build it inside this controller
 
     @GetMapping("/update/{username}")
     public String editUser(Model model, @PathVariable String username) {
+        //whenever i click on update, I need to go to database,
+        //I need to request this object (in @PathVariable String username) and I need to populate it here
         //we need to put inside this method whatever view need
         // user object ${user} view is looking for this
         // roles  ${roles} view is looking for this
