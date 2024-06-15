@@ -22,6 +22,7 @@ import java.time.LocalDate;
 //either use in another class or it is using another class, if one class has a dependency or if this class is going to be used as a dependency some other class we need to use @Component
 public class DataGenerator implements CommandLineRunner  {
     //Spring framework gives me CommandLineRunner interface (Functional Interface)
+//The CommandLineRunner interface in Spring Boot is used to execute a block of code when the application starts.
 
     private final RoleService roleService;  //one class has a dependency
     private final UserService userService;
